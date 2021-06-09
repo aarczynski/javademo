@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:demodb
+    url: jdbc:h2:mem:demodbh;DB_CLOSE_ON_EXIT=true
     driverClassName: org.h2.Driver
     username: sa
     password: password
