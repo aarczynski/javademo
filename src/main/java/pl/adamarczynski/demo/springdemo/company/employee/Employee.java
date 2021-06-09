@@ -1,4 +1,4 @@
-package pl.adamarczynski.demo.springdemo.employee;
+package pl.adamarczynski.demo.springdemo.company.employee;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,5 +21,6 @@ public class Employee {
     private String lastName;
     private BigDecimal salary;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 }

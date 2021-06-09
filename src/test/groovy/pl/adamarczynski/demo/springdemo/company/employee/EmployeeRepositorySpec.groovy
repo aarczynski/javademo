@@ -1,4 +1,4 @@
-package pl.adamarczynski.demo.springdemo.employee
+package pl.adamarczynski.demo.springdemo.company.employee
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

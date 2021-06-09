@@ -17,6 +17,6 @@ class DepartmentRepositorySpec extends Specification {
         def departments = repository.findAll()
 
         then:
-        departments*.name as Set == ['Finance', 'IT'] as Set
+        departments*.name as Set == ['Finance', 'IT', 'Delivery'] as Set
     }
 }

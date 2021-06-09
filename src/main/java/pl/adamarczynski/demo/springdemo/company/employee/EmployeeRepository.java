@@ -1,4 +1,4 @@
-package pl.adamarczynski.demo.springdemo.employee;
+package pl.adamarczynski.demo.springdemo.company.employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.adamarczynski.demo.springdemo.company.department.Department;
