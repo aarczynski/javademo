@@ -12,9 +12,9 @@ import pl.adamarczynski.demo.springdemo.company.employee.EmployeeRepository;
 
 import java.math.BigDecimal;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.math.BigDecimal.ZERO;
+import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Service
@@ -31,7 +31,7 @@ public class Company {
     public Map<String, BigDecimal> findAllCosts() {
         var cost = departmentRepository.findAll()
                 .stream()
-                .collect(Collectors.toMap(
+                .collect(toMap(
                         Department::getName,
                         v -> v.getEmployees()
                                 .stream()
@@ -47,7 +47,7 @@ public class Company {
     public DepartmentCost findDepartmentCost(@PathVariable String departmentName) {
         var employees = departmentRepository.findByNameIgnoreCase(departmentName)
                 .map(employeeRepository::findByDepartment)
-                .orElseThrow(DepartmentNotFoundException::new);
+                .orElseThrow(() -> new DepartmentNotFoundException(departmentName + "not found"));
 
         var cost = employees.stream()
                 .map(Employee::getSalary)

@@ -1,12 +1,12 @@
 package pl.adamarczynski.demo.springdemo.company.employee
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import pl.adamarczynski.demo.springdemo.company.department.Department
 import spock.lang.Specification
 import spock.lang.Subject
 
-@SpringBootTest
+@DataJpaTest
 class EmployeeRepositorySpec extends Specification {
 
     public static final UUID FINANCE_DEPARTMENT_ID = UUID.fromString('924f79b8-d0a8-401b-a1b9-942993a39259')
