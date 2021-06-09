@@ -1,7 +1,14 @@
+buildscript {
+	ext {
+		spockVersion = '2.0-groovy-3.0'
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.5.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'groovy'
 }
 
 group = 'pl.adamarczynski.demo'
@@ -19,14 +26,16 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+	compileOnly group: 'org.projectlombok', name: 'lombok'
+	annotationProcessor group: 'org.projectlombok', name: 'lombok'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'com.h2database:h2:1.4.200'
-
+	testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+	testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.8', ext: 'pom'
+	testImplementation group: 'org.spockframework', name: 'spock-core', version: spockVersion
+	testImplementation group: 'org.spockframework', name: 'spock-spring', version: spockVersion
+	testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
 
 test {
