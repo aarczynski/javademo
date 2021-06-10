@@ -8,6 +8,7 @@ import pl.adamarczynski.demo.springdemo.company.department.DepartmentNotFoundExc
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,7 +22,7 @@ public class CompanyController {
     }
 
     @GetMapping("/cost")
-    public Map<String, BigDecimal> allCosts() {
+    public List<DepartmentCost> allCosts() {
         return company.findAllCosts();
     }
 

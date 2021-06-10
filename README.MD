@@ -15,29 +15,29 @@ Use HTTP client of your choice or enter following URLs in browser:
 * http://localhost:8080/company/departments/cost
 ```json
 {
-    "Finance": 51000,
-    "IT": 12000,
-    "Delivery": 0
+    "Finance": 51000.00,
+    "IT": 12000.00,
+    "Delivery": 0.00
 }
 ```
 * http://localhost:8080/company/departments/it/cost
 ```json
 {
     "departmentName": "IT",
-    "departmentCost": 12000
+    "departmentCost": 12000.00
 }
 ```
 * http://localhost:8080/company/departments/finance/cost
 ```json
 {
     "departmentName": "Finance",
-    "departmentCost": 51000
+    "departmentCost": 51000.00
 }
 ```
 * http://localhost:8080/company/departments/delivery/cost
 ```json
 {
     "departmentName": "Delivery",
-    "departmentCost": 0
+    "departmentCost": 0.00
 }
 ```

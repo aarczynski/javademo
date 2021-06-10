@@ -11,25 +11,26 @@ import pl.adamarczynski.demo.springdemo.company.employee.Employee;
 import pl.adamarczynski.demo.springdemo.company.employee.EmployeeRepository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.math.BigDecimal.ZERO;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Service
 public class Company {
 
-    private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
 
-    public Company(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
-        this.employeeRepository = employeeRepository;
+    public Company(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
 
-    public Map<String, BigDecimal> findAllCosts() {
+    public List<DepartmentCost> findAllCosts() {
         var cost = departmentRepository.findAll()
                 .stream()
                 .collect(toMap(
@@ -42,7 +43,9 @@ public class Company {
                 );
 
         log.info("Found costs of {} departments", cost.size());
-        return cost;
+        return cost.entrySet().stream()
+                .map(e -> new DepartmentCost(e.getKey(), e.getValue()))
+                .collect(toList());
     }
 
     public DepartmentCost findDepartmentCost(@PathVariable String departmentName) {

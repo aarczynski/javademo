@@ -26,8 +26,8 @@ class CompanyControllerSpec extends Specification {
     def "should return json response for all departments"() {
         given:
         company.findAllCosts() >> [
-                "IT": new BigDecimal('1000.0'),
-                "Finance": new BigDecimal('2000.0')
+                new DepartmentCost('IT', new BigDecimal('1000.00')),
+                new DepartmentCost('Finance', new BigDecimal('2000.00'))
         ]
 
         when:
@@ -35,8 +35,10 @@ class CompanyControllerSpec extends Specification {
 
         then:
         response.andExpect(status().isOk())
-                .andExpect(jsonPath('$.IT').value('1000.0'))
-                .andExpect(jsonPath('$.Finance').value('2000.0'))
+                .andExpect(jsonPath('$[0].departmentName').value('IT'))
+                .andExpect(jsonPath('$[0].departmentCost').value('1000.00'))
+                .andExpect(jsonPath('$[1].departmentName').value('Finance'))
+                .andExpect(jsonPath('$[1].departmentCost').value('2000.00'))
     }
 
     def "should return json response for given department"() {
@@ -49,7 +51,7 @@ class CompanyControllerSpec extends Specification {
         then:
         response.andExpect(status().isOk())
                 .andExpect(jsonPath('$.departmentName').value('it'))
-                .andExpect(jsonPath('$.departmentCost').value('500.0'))
+                .andExpect(jsonPath('$.departmentCost').value('500.00'))
     }
 
     def "should return 404 when department does not exist"() {

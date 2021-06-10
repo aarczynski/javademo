@@ -1,6 +1,7 @@
 package pl.adamarczynski.demo.springdemo.company
 
 import pl.adamarczynski.demo.springdemo.company.department.Department
+import pl.adamarczynski.demo.springdemo.company.department.DepartmentCost
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentRepository
 import pl.adamarczynski.demo.springdemo.company.employee.Employee
 import pl.adamarczynski.demo.springdemo.company.employee.EmployeeRepository
@@ -9,16 +10,15 @@ import spock.lang.Subject
 
 class CompanySpec extends Specification {
 
-    private EmployeeRepository employeeRepository = Mock()
     private DepartmentRepository departmentRepository = Mock()
 
     @Subject
-    private company = new Company(employeeRepository, departmentRepository)
+    private company = new Company(departmentRepository)
 
     void setup() {
-        var adam = new Employee(firstName: 'Adam', salary: new BigDecimal('1000'))
-        var maciej = new Employee(firstName: 'Maciej', salary: new BigDecimal('2000'))
-        var anna = new Employee(firstName: 'Anna', salary: new BigDecimal('5000'))
+        var adam = new Employee(firstName: 'Adam', salary: new BigDecimal('1000.00'))
+        var maciej = new Employee(firstName: 'Maciej', salary: new BigDecimal('2000.00'))
+        var anna = new Employee(firstName: 'Anna', salary: new BigDecimal('5000.00'))
 
         var it = new Department(id: UUID.randomUUID(), name: "IT", employees: [adam, maciej])
         var finance = new Department(id: UUID.randomUUID(), name: "Finance", employees: [anna])
@@ -28,11 +28,6 @@ class CompanySpec extends Specification {
         departmentRepository.findByNameIgnoreCase('finance') >> Optional.of(finance)
         departmentRepository.findByNameIgnoreCase('delivery') >> Optional.of(delivery)
         departmentRepository.findAll() >> [it, finance, delivery]
-
-        employeeRepository.findByDepartment(it) >> [adam, maciej]
-        employeeRepository.findByDepartment(finance) >> [anna]
-        employeeRepository.findByDepartment(delivery) >> []
-        employeeRepository.findAll() >> [adam, maciej, anna]
     }
 
     def "should find all departments costs"() {
@@ -40,9 +35,11 @@ class CompanySpec extends Specification {
         def costs = company.findAllCosts()
 
         then:
-        costs['IT'] == 3000
-        costs['Finance'] == 5000
-        costs['Delivery'] == 0
+        costs as Set == [
+                new DepartmentCost('IT', new BigDecimal("3000.00")),
+                new DepartmentCost('Finance', new BigDecimal("5000.00")),
+                new DepartmentCost('Delivery', new BigDecimal("0.00"))
+        ] as Set
     }
 
     def "#expectedDisplayName should cost #expectedCost"() {
