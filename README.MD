@@ -14,11 +14,20 @@
 Use HTTP client of your choice or enter following URLs in browser:
 * http://localhost:8080/company/departments/cost
 ```json
-{
-    "Finance": 51000.00,
-    "IT": 12000.00,
-    "Delivery": 0.00
-}
+[
+  {
+    "departmentName": "Finance",
+    "departmentCost": "51000.00"
+  },
+  {
+    "departmentName": "IT",
+    "departmentCost": "12000.00"
+  },
+  {
+    "departmentName": "Delivery",
+    "departmentCost": "0.00"
+  }
+]
 ```
 * http://localhost:8080/company/departments/it/cost
 ```json
