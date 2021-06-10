@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: docker-compose/app/Dockerfile
+    command: [
+      "./wait-for-it.sh", "postgres",
+      "java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005", #debug enabled
+      "-jar", "/app/application.jar"
+    ]
+    env_file:
+      - ./docker-compose/postgres/variables.env
+    ports:
+    - 8080:8080
+    - 5005:5005
+    networks: [javademo-network]
+    container_name: demo_app
+
+  postgres:
+    image: "postgres:13.3"
+    env_file:
+      - ./docker-compose/postgres/variables.env
+    ports:
+    - 5432:5432
+    networks: [javademo-network]
+    container_name: demo_postgres
+
+networks:
+  javademo-network:
