@@ -2,9 +2,9 @@ package pl.adamarczynski.demo.springdemo.company
 
 import pl.adamarczynski.demo.springdemo.company.department.Department
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentCost
+import pl.adamarczynski.demo.springdemo.company.department.DepartmentNotFoundException
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentRepository
 import pl.adamarczynski.demo.springdemo.company.employee.Employee
-import pl.adamarczynski.demo.springdemo.company.employee.EmployeeRepository
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -55,5 +55,17 @@ class CompanySpec extends Specification {
         'it'           | 3000         | 'IT'
         'finance'      | 5000         | 'Finance'
         'delivery'     | 0            | 'Delivery'
+    }
+
+    def "should throw exception when asked for non-existent department"() {
+        given:
+        departmentRepository.findByNameIgnoreCase(_) >> Optional.empty()
+
+        when:
+        company.findDepartmentCost('wrong')
+
+        then:
+        def ex = thrown(DepartmentNotFoundException)
+        ex.getMessage() == 'wrong department not found'
     }
 }
