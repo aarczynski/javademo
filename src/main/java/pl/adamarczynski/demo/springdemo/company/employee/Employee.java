@@ -2,6 +2,7 @@ package pl.adamarczynski.demo.springdemo.company.employee;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pl.adamarczynski.demo.springdemo.company.department.Department;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private BigDecimal salary;
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;

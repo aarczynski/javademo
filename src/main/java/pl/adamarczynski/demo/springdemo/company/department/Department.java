@@ -2,6 +2,7 @@ package pl.adamarczynski.demo.springdemo.company.department;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pl.adamarczynski.demo.springdemo.company.employee.Employee;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Department {
     @EqualsAndHashCode.Include
     private UUID id;
     private String name;
+    @ToString.Exclude
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<Employee> employees;
 
