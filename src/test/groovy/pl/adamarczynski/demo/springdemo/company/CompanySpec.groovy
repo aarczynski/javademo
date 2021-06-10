@@ -24,9 +24,9 @@ class CompanySpec extends Specification {
         var finance = new Department(id: UUID.randomUUID(), name: "Finance", employees: [anna])
         var delivery = new Department(id: UUID.randomUUID(), name: "Delivery", employees: [])
 
-        departmentRepository.findByNameIgnoreCase('IT') >> Optional.of(it)
-        departmentRepository.findByNameIgnoreCase('Finance') >> Optional.of(finance)
-        departmentRepository.findByNameIgnoreCase('Delivery') >> Optional.of(delivery)
+        departmentRepository.findByNameIgnoreCase('it') >> Optional.of(it)
+        departmentRepository.findByNameIgnoreCase('finance') >> Optional.of(finance)
+        departmentRepository.findByNameIgnoreCase('delivery') >> Optional.of(delivery)
         departmentRepository.findAll() >> [it, finance, delivery]
 
         employeeRepository.findByDepartment(it) >> [adam, maciej]
@@ -45,18 +45,18 @@ class CompanySpec extends Specification {
         costs['Delivery'] == 0
     }
 
-    def "#departmentName should cost #expectedCost"() {
+    def "#expectedDisplayName should cost #expectedCost"() {
         when:
         def actual = company.findDepartmentCost(departmentName)
 
         then:
-        actual.departmentName == departmentName
+        actual.departmentName == expectedDisplayName
         actual.departmentCost == expectedCost
 
         where:
-        departmentName | expectedCost
-        'IT'           | 3000
-        'Finance'      | 5000
-        'Delivery'     | 0
+        departmentName | expectedCost | expectedDisplayName
+        'it'           | 3000         | 'IT'
+        'finance'      | 5000         | 'Finance'
+        'delivery'     | 0            | 'Delivery'
     }
 }

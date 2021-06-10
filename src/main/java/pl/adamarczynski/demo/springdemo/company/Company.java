@@ -11,6 +11,7 @@ import pl.adamarczynski.demo.springdemo.company.employee.Employee;
 import pl.adamarczynski.demo.springdemo.company.employee.EmployeeRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import static java.math.BigDecimal.ZERO;
@@ -40,20 +41,21 @@ public class Company {
                         )
                 );
 
-        log.info("Found cost of {} departments", cost.size());
+        log.info("Found costs of {} departments", cost.size());
         return cost;
     }
 
     public DepartmentCost findDepartmentCost(@PathVariable String departmentName) {
-        var employees = departmentRepository.findByNameIgnoreCase(departmentName)
-                .map(employeeRepository::findByDepartment)
-                .orElseThrow(() -> new DepartmentNotFoundException(departmentName + "not found"));
+        var department = departmentRepository.findByNameIgnoreCase(departmentName)
+                .orElseThrow(() -> new DepartmentNotFoundException("not found"));
 
-        var cost = employees.stream()
+        var employees = department.getEmployees();
+        var cost = employees
+                .stream()
                 .map(Employee::getSalary)
                 .reduce(ZERO, BigDecimal::add);
 
         log.info("Found total cost of {} {} employees equal to {}", employees.size(), departmentName, cost);
-        return new DepartmentCost(departmentName, cost);
+        return new DepartmentCost(department.getName(), cost);
     }
 }
