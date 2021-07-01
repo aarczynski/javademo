@@ -43,7 +43,7 @@ class CompanyControllerSpec extends Specification {
 
     def "should return json response for given department"() {
         given:
-        company.findDepartmentCost('it') >> new DepartmentCost('it', new BigDecimal('500.0'))
+        company.findDepartmentCost('it') >> new DepartmentCost('it', new BigDecimal('500.00'))
 
         when:
         def response = mockMvc.perform(get('/company/departments/it/cost'))

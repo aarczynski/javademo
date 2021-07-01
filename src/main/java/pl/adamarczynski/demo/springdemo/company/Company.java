@@ -2,7 +2,6 @@ package pl.adamarczynski.demo.springdemo.company;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import pl.adamarczynski.demo.springdemo.company.department.Department;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentCost;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentNotFoundException;
@@ -44,7 +43,7 @@ public class Company {
                 .collect(toList());
     }
 
-    public DepartmentCost findDepartmentCost(@PathVariable String departmentName) {
+    public DepartmentCost findDepartmentCost(String departmentName) {
         var department = departmentRepository.findByNameIgnoreCase(departmentName)
                 .orElseThrow(() -> new DepartmentNotFoundException(departmentName + " department not found"));
 

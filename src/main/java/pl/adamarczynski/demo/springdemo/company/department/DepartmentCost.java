@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 @Value
 public class DepartmentCost {
     String departmentName;
-    @JsonFormat(shape=JsonFormat.Shape.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     BigDecimal departmentCost;
 
     public DepartmentCost(String departmentName, BigDecimal departmentCost) {
