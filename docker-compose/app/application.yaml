@@ -4,4 +4,4 @@ spring:
     platform: postgres
     url: jdbc:postgresql://postgres:5432/demodb
     username: postgres
-    password: postgresspassword
+    password: postgrespassword
