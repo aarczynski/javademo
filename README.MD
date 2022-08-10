@@ -8,7 +8,7 @@
 ```
 ## RUNNING LOCALLY
 ```shell
-./gradlew clean build && docker-compose up --build
+./gradlew clean bootRun
 ```
 ## CALLING LOCAL ENDPOINTS
 Use HTTP client of your choice or enter following URLs in browser:

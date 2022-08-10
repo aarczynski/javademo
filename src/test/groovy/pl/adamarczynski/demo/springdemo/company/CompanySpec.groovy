@@ -16,13 +16,13 @@ class CompanySpec extends Specification {
     private company = new Company(departmentRepository)
 
     void setup() {
-        var adam = new Employee(firstName: 'Adam', salary: new BigDecimal('1000.00'))
-        var maciej = new Employee(firstName: 'Maciej', salary: new BigDecimal('2000.00'))
-        var anna = new Employee(firstName: 'Anna', salary: new BigDecimal('5000.00'))
+        var adam = new Employee(UUID.randomUUID(), 'Adam', 'Adamski', new BigDecimal('1000.00'), null)
+        var maciej = new Employee(UUID.randomUUID(), 'Maciej', 'Maciejewski', new BigDecimal('2000.00'), null)
+        var anna = new Employee(UUID.randomUUID(), 'Anna', 'Kwiatkowska', new BigDecimal('5000.00'), null)
 
-        var it = new Department(id: UUID.randomUUID(), name: "IT", employees: [adam, maciej])
-        var finance = new Department(id: UUID.randomUUID(), name: "Finance", employees: [anna])
-        var delivery = new Department(id: UUID.randomUUID(), name: "Delivery", employees: [])
+        var it = new Department(UUID.randomUUID(), "IT", [adam, maciej])
+        var finance = new Department(UUID.randomUUID(), "Finance", [anna])
+        var delivery = new Department(UUID.randomUUID(), "Delivery", [])
 
         departmentRepository.findByNameIgnoreCase('it') >> Optional.of(it)
         departmentRepository.findByNameIgnoreCase('finance') >> Optional.of(finance)

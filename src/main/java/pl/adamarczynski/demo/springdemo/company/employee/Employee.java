@@ -1,15 +1,16 @@
 package pl.adamarczynski.demo.springdemo.company.employee;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.adamarczynski.demo.springdemo.company.department.Department;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee {
 
