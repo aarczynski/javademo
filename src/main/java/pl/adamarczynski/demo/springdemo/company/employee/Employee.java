@@ -11,18 +11,13 @@ import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-@Table(name = "EMPLOYEE", schema = "COMPANY")
 public class Employee {
 
-    @Id
     @EqualsAndHashCode.Include
     private UUID id;
     private String firstName;
     private String lastName;
     private BigDecimal salary;
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 }

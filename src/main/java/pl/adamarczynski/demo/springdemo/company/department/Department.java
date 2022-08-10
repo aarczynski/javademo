@@ -13,17 +13,14 @@ import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-@Table(name = "DEPARTMENT", schema = "COMPANY")
 public class Department {
 
-    @Id
+
+
     @EqualsAndHashCode.Include
     private UUID id;
     private String name;
     @ToString.Exclude
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    @Fetch(value = FetchMode.SUBSELECT)
     private List<Employee> employees;
 
 }

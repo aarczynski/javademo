@@ -6,6 +6,8 @@ import pl.adamarczynski.demo.springdemo.company.department.Department;
 import java.util.List;
 import java.util.UUID;
 
-public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
-    List<Employee> findByDepartment(Department department);
+public class EmployeeRepository {
+    public List<Employee> findByDepartment(Department department) {
+
+    }
 }

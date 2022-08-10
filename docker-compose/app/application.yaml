@@ -1,7 +1,0 @@
-spring:
-  jpa.database: POSTGRESQL
-  datasource:
-    platform: postgres
-    url: jdbc:postgresql://postgres:5432/demodb
-    username: postgres
-    password: postgrespassword
