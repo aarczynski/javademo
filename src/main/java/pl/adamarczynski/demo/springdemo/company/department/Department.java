@@ -3,6 +3,8 @@ package pl.adamarczynski.demo.springdemo.company.department;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -19,6 +21,9 @@ import java.util.UUID;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "DEPARTMENT", schema = "COMPANY")
+@NamedEntityGraph(name = "Department.employees",
+        attributeNodes = @NamedAttributeNode("employees")
+)
 public class Department {
 
     @Id

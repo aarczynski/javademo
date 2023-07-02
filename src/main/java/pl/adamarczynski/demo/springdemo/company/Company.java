@@ -26,7 +26,7 @@ public class Company {
     }
 
     public List<DepartmentCost> findAllCosts() {
-        var cost = departmentRepository.findAll()
+        var cost = departmentRepository.findAllBy()
                 .stream()
                 .collect(toMap(
                         Department::getName,

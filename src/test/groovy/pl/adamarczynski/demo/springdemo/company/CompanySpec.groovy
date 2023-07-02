@@ -27,7 +27,7 @@ class CompanySpec extends Specification {
         departmentRepository.findByNameIgnoreCase('it') >> Optional.of(it)
         departmentRepository.findByNameIgnoreCase('finance') >> Optional.of(finance)
         departmentRepository.findByNameIgnoreCase('delivery') >> Optional.of(delivery)
-        departmentRepository.findAll() >> [it, finance, delivery]
+        departmentRepository.findAllBy() >> [it, finance, delivery]
     }
 
     def "should find all departments costs"() {
