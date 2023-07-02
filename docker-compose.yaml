@@ -2,30 +2,34 @@ version: '3.9'
 
 services:
   app:
+    container_name: demo_app
     build:
       context: ./
       dockerfile: docker-compose/app/Dockerfile
-    command: [
-      "./wait-for-it.sh", "postgres",
-      "java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005", #debug enabled
-      "-jar", "/app/application.jar"
-    ]
+    command: [ "java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "./application.jar" ]
     env_file:
       - ./docker-compose/postgres/variables.env
     ports:
     - 8080:8080
     - 5005:5005
     networks: [javademo-network]
-    container_name: demo_app
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   postgres:
+    container_name: demo_postgres
     image: "postgres:13.3"
     env_file:
       - ./docker-compose/postgres/variables.env
     ports:
     - 5432:5432
     networks: [javademo-network]
-    container_name: demo_postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
 networks:
   javademo-network:
