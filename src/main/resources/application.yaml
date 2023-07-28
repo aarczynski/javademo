@@ -1,5 +1,8 @@
 spring:
-  flyway:
-    locations: db/migration/postgres
   jpa:
     open-in-view: false
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: db/migration/postgres
