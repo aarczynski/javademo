@@ -7,8 +7,6 @@ services:
       context: ./
       dockerfile: docker-compose/app/Dockerfile
     command: [ "java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "./application.jar" ]
-    env_file:
-      - ./docker-compose/postgres/variables.env
     ports:
     - 8080:8080
     - 5005:5005
