@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentCost;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentNotFoundException;
 
@@ -43,7 +42,7 @@ public class CompanyController {
     public class ExceptionResolver {
         @ExceptionHandler(DepartmentNotFoundException.class)
         @ResponseStatus(HttpStatus.NOT_FOUND)
-        public HashMap<String, String> handleDepartmentNotFound(DepartmentNotFoundException e, WebRequest r) {
+        public HashMap<String, String> handleDepartmentNotFound(DepartmentNotFoundException e) {
             log.error("Requested department not found - returning 404", e);
             return buildErrorResponse(e);
         }
