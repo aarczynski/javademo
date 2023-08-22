@@ -33,6 +33,7 @@ class CompanyControllerSpec extends Specification {
 
         then:
         response.andExpect(status().isOk())
+                .andExpect(jsonPath('$.length()').value(2))
                 .andExpect(jsonPath('$[0].departmentName').value('IT'))
                 .andExpect(jsonPath('$[0].departmentCost').value('1000.00'))
                 .andExpect(jsonPath('$[1].departmentName').value('Finance'))
