@@ -7,7 +7,6 @@ import org.springframework.test.web.servlet.MockMvc
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentCost
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentNotFoundException
 import spock.lang.Specification
-import spock.lang.Subject
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
@@ -20,7 +19,6 @@ class CompanyControllerSpec extends Specification {
     private Company company = Mock()
 
     @Autowired
-    @Subject
     private MockMvc mockMvc
 
     def "should return json response for all departments"() {
