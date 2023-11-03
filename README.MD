@@ -1,6 +1,6 @@
 # JAVA DEMO APP
 ## REQUIREMENTS
-* JDK 11 or newer installed on your machine
+* JDK 17 or newer installed on your machine
 * docker and docker compose installed on your machine
 ## RUNNING TESTS
 ```shell
