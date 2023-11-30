@@ -8,9 +8,9 @@ services:
       dockerfile: docker-compose/app/Dockerfile
     command: [ "java", "-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "./application.jar" ]
     ports:
-    - 8080:8080
-    - 5005:5005
-    networks: [javademo-network]
+      - 8080:8080
+      - 5005:5005
+    networks: [ javademo-network ]
     depends_on:
       postgres:
         condition: service_healthy
@@ -21,13 +21,18 @@ services:
     env_file:
       - ./docker-compose/postgres/variables.env
     ports:
-    - 5432:5432
-    networks: [javademo-network]
+      - 5432:5432
+    volumes:
+      - javademo-app-db:/var/lib/postgresql/data
+    networks: [ javademo-network ]
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 3s
       retries: 10
+
+volumes:
+  javademo-app-db:
 
 networks:
   javademo-network:
