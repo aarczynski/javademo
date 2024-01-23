@@ -17,7 +17,7 @@ services:
 
   postgres:
     container_name: demo_postgres
-    image: "postgres:13.3"
+    image: "postgres:15.5"
     env_file:
       - ./docker-compose/postgres/variables.env
     ports:
