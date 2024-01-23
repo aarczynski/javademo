@@ -2,7 +2,6 @@ package pl.adamarczynski.demo.springdemo.company;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.adamarczynski.demo.springdemo.company.department.Department;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentCost;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentNotFoundException;
 import pl.adamarczynski.demo.springdemo.company.department.DepartmentRepository;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Service
@@ -26,20 +24,9 @@ public class Company {
     }
 
     public List<DepartmentCost> findAllCosts() {
-        var cost = departmentRepository.findAllBy()
+        return departmentRepository.findAllBy()
                 .stream()
-                .collect(toMap(
-                        Department::getName,
-                        v -> v.getEmployees()
-                                .stream()
-                                .map(Employee::getSalary)
-                                .reduce(ZERO, BigDecimal::add)
-                        )
-                );
-
-        log.info("Found costs of {} departments", cost.size());
-        return cost.entrySet().stream()
-                .map(e -> new DepartmentCost(e.getKey(), e.getValue()))
+                .map(department -> new DepartmentCost(department.getName(), department.calculateCost()))
                 .collect(toList());
     }
 

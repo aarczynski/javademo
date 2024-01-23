@@ -12,8 +12,11 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.adamarczynski.demo.springdemo.company.employee.Employee;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+
+import static java.math.BigDecimal.ZERO;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -31,6 +34,13 @@ public class Department {
     @ToString.Exclude
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
     private List<Employee> employees;
+
+    public BigDecimal calculateCost() {
+        return getEmployees()
+                .stream()
+                .map(Employee::getSalary)
+                .reduce(ZERO, BigDecimal::add);
+    }
 }
 
 
