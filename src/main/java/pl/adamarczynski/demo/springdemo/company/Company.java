@@ -24,10 +24,13 @@ public class Company {
     }
 
     public List<DepartmentCost> findAllCosts() {
-        return departmentRepository.findAllBy()
+        List<DepartmentCost> costs = departmentRepository.findAllBy()
                 .stream()
                 .map(department -> new DepartmentCost(department.getName(), department.calculateCost()))
                 .collect(toList());
+
+        log.info("Found costs of {} departments", costs.size());
+        return costs;
     }
 
     public DepartmentCost findDepartmentCost(String departmentName) {
