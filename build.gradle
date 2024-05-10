@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '3.2.2'
+	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'java'
 	id 'groovy'
@@ -25,8 +25,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core:9.22.3'
-	implementation 'org.postgresql:postgresql:42.7.1'
+	implementation 'org.postgresql:postgresql:42.7.3'
+	implementation "org.flywaydb:flyway-core:$flywayVersion"
+	runtimeOnly "org.flywaydb:flyway-database-postgresql:$flywayVersion"
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
